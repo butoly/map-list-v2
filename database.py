@@ -26,6 +26,7 @@ class Database:
             self.cursor.execute(sqlite_create_table_users)
             self.cursor.execute(sqlite_create_table_place)
             self.sqlite_connection.commit()
+            self.addData()
 
         except sqlite3.Error as error:
             print("Ошибка при подключении к sqlite", error)
@@ -33,6 +34,7 @@ class Database:
             if (self.sqlite_connection):
                 print("Соединение с SQLite закрыто")
 
+    # Тест добавления данных в БД
     def addData(self):
         self.cursor.execute("""INSERT INTO users ('name', 'email') VALUES ('Leha', 'leha@yandex.ru')""")
         self.cursor.execute("""INSERT INTO users ('name', 'email') VALUES ('sany1', 'sany1@yandex.ru')""")
@@ -44,10 +46,21 @@ class Database:
 
         self.sqlite_connection.commit()
 
-    def getData(self):
+    # Тест получения данных из БД
+    # def getData(self):
+    #     self.cursor.execute("""SELECT * FROM users""")
+    #     rows = self.cursor.fetchall()
+    #     print(rows)
+    #     self.cursor.execute("""SELECT * FROM place""")
+    #     rows = self.cursor.fetchall()
+    #     print(rows)
+
+    def getUsers(self):
         self.cursor.execute("""SELECT * FROM users""")
-        rows = self.cursor.fetchall()
-        print(rows)
+        users = self.cursor.fetchall()
+        return users
+
+    def getPlaces(self):
         self.cursor.execute("""SELECT * FROM place""")
-        rows = self.cursor.fetchall()
-        print(rows)
+        places = self.cursor.fetchall()
+        return places

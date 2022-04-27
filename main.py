@@ -3,13 +3,15 @@ import database
 
 app = FastAPI()
 db = database.Database()
-db.addData()
-db.getData()
 
 
 @app.get("/getUsers")
-async def read_item():
-    return {"name": "name",
-            "id_person": "id_person",
-            "picture": "picture",
-            }
+async def getUsers():
+    response = db.getUsers()
+    return {'responce': response}
+
+
+@app.get("/getPlaces")
+async def getPlaces():
+    response = db.getPlaces()
+    return {'responce': response}
