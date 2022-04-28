@@ -15,3 +15,10 @@ async def getUsers():
 async def getPlaces():
     response = db.getPlaces()
     return {'responce': response}
+
+
+@app.get("/getPlaces/{id}")
+async def getPlaces(user_id):
+    response = db.getPlacesByUserID(user_id)
+    print(response)
+    return {'responce': response}
